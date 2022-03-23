@@ -18,5 +18,5 @@
 * Postman
 * Figma
 
-## Next Steps: Marcus was here
+## Next Steps:
 ----------
