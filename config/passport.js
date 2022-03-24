@@ -13,5 +13,37 @@ passport.use(
       callbackURL: process.env.GOOGLE_CALLBACK,
     },
     function (accessToken, refreshToken, profile, done) {
+      User.findOne({ googleId: profile.id }, function (err, user) {
+        if (err) return done(err)
+        if (user) {
+          return done(null, user)
+        } else {
+          // we have a new student via OAuth!
+          const newProfile = new Profile({
+            name: profile.displayName,
+            avatar: profile.photos[0].value,
+          })
+          // Build the user from 
+          const newUser = new User({
+            email: profile.emails[0].value,
+            googleId: profile.id,
+            profile: newProfile._id
+          })
+          newProfile.save(function (err) {
+            if (err) return done(err)
+          })
+          newUser.save(function (err) {
+            if (err) {
+              // Something went wrong while making a user - delete the profile
+              // we just created to prevent orphan profiles.
+              Profile.findByIdAndDelete(newProfile._id)
+              return done(err)
+            }
+            return done(null, newUser)
+          })
+        }
+      })
     }
+  )
+)
   
