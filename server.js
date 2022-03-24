@@ -4,6 +4,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import logger from 'morgan'
 import cors from 'cors'
+import session from 'express-session'
 
 import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
@@ -17,6 +18,18 @@ app.use(
     path.join(path.dirname(fileURLToPath(import.meta.url)), 'build')
   )
 )
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      sameSite: 'lax',
+    }
+  })
+)
+
 app.use(cors())
 app.use(logger('dev'))
 
