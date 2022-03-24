@@ -15,10 +15,11 @@ router.get(
   passport.authenticate('google', {
     successRedirect: '/',
     failureRedirect: '/', 
+    scope: ['profile', 'email'] 
   })
 )
 
-router.get('/logout', function(req, res) {
+router.get('/logout', function(req, res) { 
   req.logout()
   res.redirect('/students')
 })
