@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url'
 import logger from 'morgan'
 import cors from 'cors'
 import session from 'express-session'
+import passport from 'passport'
 
 import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
@@ -29,6 +30,9 @@ app.use(
     }
   })
 )
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(cors())
 app.use(logger('dev'))
