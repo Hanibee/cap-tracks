@@ -13,12 +13,13 @@ router.get(
 router.get(
   '/google/oauth2callback', 
   passport.authenticate('google', {
-    successRedirect: '/students',
-    failureRedirect: '/students',
+    successRedirect: '/',
+    failureRedirect: '/', 
+    scope: ['profile', 'email'] 
   })
 )
 
-router.get('/logout', function(req, res) {
+router.get('/logout', function(req, res) { 
   req.logout()
   res.redirect('/students')
 })

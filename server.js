@@ -15,6 +15,9 @@ import('./config/passport.js')
 
 const app = express()
 
+app.use(cors())
+app.use(logger('dev'))
+
 app.use(
   express.static(
     path.join(path.dirname(fileURLToPath(import.meta.url)), 'build')
@@ -32,11 +35,13 @@ app.use(
   })
 )
 
+
+
+
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(cors())
-app.use(logger('dev'))
+
 
 app.use(express.json())
 
