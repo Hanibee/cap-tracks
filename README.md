@@ -16,7 +16,7 @@
 * Node.js
 * WMATA API
 * Postman
-* Ligma
+* Figma
 
 ## Next Steps:
 ----------
