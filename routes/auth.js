@@ -18,6 +18,11 @@ router.get(
   })
 )
 
+router.get('/logout', function(req, res) {
+  req.logout()
+  res.redirect('/students')
+})
+
 /*---------- Public Routes ----------*/
 router.post('/signup', authCtrl.signup)
 router.post('/login', authCtrl.login)
