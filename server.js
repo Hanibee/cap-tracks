@@ -19,6 +19,7 @@ app.use(
 )
 app.use(cors())
 app.use(logger('dev'))
+
 app.use(express.json())
 
 app.use('/api/profiles', profilesRouter)
